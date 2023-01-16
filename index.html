@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>localStorage</title>
+</head>
+<body>
+    <div id="container">
+    <h2>Notises</h2>
+    <div id="area"></div>
+<p><input type="text" id="item" placeholder="Введите заметку"></p>
+<button id="vvod">Ввод данных</button>
+<button  id="clearStorage">Очистить</button>
+</div>
+<script>
+    let notes=[];
+    loadNotes ();
+    area.value = localStorage.getItem('area');
+    vvod.addEventListener('click',()=>{
+        let note = document.getElementById('item').value;
+        notes.push(note);
+        console.log(notes);
+        item.value = '';
+        saveNotes();
+        showNotes();
+    });
+        function saveNotes(){
+    localStorage.setItem('notes',JSON.stringify(notes));
+    };
+    function loadNotes (){
+        if (localStorage.getItem('notes')) notes =JSON.parse(localStorage.getItem('notes'));
+        showNotes();
+    }
+    function showNotes (){
+        let area =document.getElementById('area');
+        let out ='';
+        notes.forEach(function(note){
+            out += `<p><h3>* ${note}</h3></p>`;
+            console.log(out);
+        });
+    area.innerHTML = out;
+    }
+    clearStorage.addEventListener('click',() =>{
+        localStorage.clear();
+    
+    })
+</script>
+    
+
+</body>
+</html>
